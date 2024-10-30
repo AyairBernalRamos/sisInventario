@@ -9,7 +9,7 @@ import controlador.AUsuarios;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import modelo.usuarios;
-
+//prueba de rama desarrrollo
 /**
  *
  * @author Ayair Martin
