@@ -22,7 +22,7 @@ public class MenuPrinci extends javax.swing.JFrame {
         this.setBackground(new Color(0,0,0,0));
         
         Home h = new Home();
-        h.setSize(982,740);
+        h.setSize(1000,900);
         h.setLocation(0,0);
         
         contenedor.removeAll();
@@ -64,6 +64,7 @@ public class MenuPrinci extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(50, 28, 145));
 
         jLabel1.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("INVENTARIO");
 
         btnhome.setBackground(new java.awt.Color(50, 28, 145));
@@ -247,6 +248,8 @@ public class MenuPrinci extends javax.swing.JFrame {
         
         btncategorias.setSelected(true);
         btnhome.setSelected(false);
+        btnclientes.setSelected(false);
+        
         
         Categorias c = new Categorias();
         c.setSize(982,800);
@@ -262,7 +265,22 @@ public class MenuPrinci extends javax.swing.JFrame {
     }//GEN-LAST:event_btncategoriasActionPerformed
 
     private void btnclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnclientesActionPerformed
-        // TODO add your handling code here:
+        // boton clientes
+        btncategorias.setSelected(false);
+        btnclientes.setSelected(true);
+        btnhome.setSelected(false);
+        
+        Clientes c = new Clientes();
+        c.setSize(982,840);
+        c.setLocation(0,0);
+        
+        contenedor.removeAll();
+        contenedor.add(c,BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
+        
+        
+        
     }//GEN-LAST:event_btnclientesActionPerformed
 
     private void btnentradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnentradasActionPerformed
@@ -296,8 +314,9 @@ public class MenuPrinci extends javax.swing.JFrame {
         
         btnhome.setSelected(true);
         btncategorias.setSelected(false);
+        btnclientes.setSelected(false);
         Home h = new Home();
-        h.setSize(982,740);
+        h.setSize(1000,900);
         h.setLocation(0,0);
         
         contenedor.removeAll();
