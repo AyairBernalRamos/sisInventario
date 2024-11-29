@@ -25,7 +25,7 @@ public class AUsuarios {
     
     public usuarios login(String usuario, String pass) {
         usuarios us = new usuarios();
-        String sql = "SELECT * FROM usuarios WHERE usuario='"+usuario+"' and password='"+pass+"'";
+        String sql = "SELECT * FROM usuarios WHERE usuario='"+usuario+"' and pass=aes_encrypt('"+pass+"','clave')";
         try{
             con=cn.conectar();
             ps=con.prepareStatement(sql);
