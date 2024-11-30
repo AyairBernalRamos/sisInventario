@@ -222,6 +222,11 @@ public class Clientes extends javax.swing.JPanel {
                 "ID", "Nombres", "Apellidos", "Documento", "Dirección", "Teléfono", "Correo"
             }
         ));
+        tbclientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbclientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbclientes);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -236,7 +241,7 @@ public class Clientes extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
         );
@@ -250,6 +255,7 @@ public class Clientes extends javax.swing.JPanel {
             }
         });
 
+        btneliminar.setBackground(new java.awt.Color(255, 0, 51));
         btneliminar.setText("Eliminar");
         btneliminar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.DELETE);
         btneliminar.setRound(25);
@@ -275,24 +281,24 @@ public class Clientes extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(rSButtonMaterialIconDos1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1)))
-                .addContainerGap(124, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btneditar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(188, 188, 188))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btneditar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(70, 70, 70)))))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,16 +310,17 @@ public class Clientes extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btneditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(218, Short.MAX_VALUE))
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btneditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(19, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -330,12 +337,16 @@ public class Clientes extends javax.swing.JPanel {
         c.setTelefono(txttelefono.getText());
         c.setCorreo(txtcorreo.getText());
         if(auClientes.insertar(c)){
-            JOptionPane.showMessageDialog(null, "Cliente registrado con éxito");
+           //JOptionPane.showMessageDialog(null, "Cliente registrado con éxito");
+           MenuPrinci m = new MenuPrinci();
+           m.exito("Cliente registrado con éxito");
            limpiarCampos();//llamamos al metodo limpiar
            limpiarTablaClientes();
         listarClientes();
         }else{
-            JOptionPane.showMessageDialog(null, "No se registró el cliente");
+            MenuPrinci m = new MenuPrinci();
+            m.error("No se registró el cliente");
+            //JOptionPane.showMessageDialog(null, "No se registró el cliente");
         }
         
         
@@ -344,54 +355,90 @@ public class Clientes extends javax.swing.JPanel {
 
     private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
         // TODO add your handling code here:
-        /*int fila = tbCategorias.getSelectedRow();
-        if(fila==-1 && txtidcategoria.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Seleccione una categoria");
+        int fila = tbclientes.getSelectedRow();
+        if(fila==-1 && txtidcliente.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Seleccione un cliente");
         }
         else{
-            ct.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
-            ct.setNomCategoria(txtnombreCategoria.getText());
-            if (auCt.editar(ct)) {
-                JOptionPane.showMessageDialog(null, "Se modificó con éxito");
-                limpiarTablaCategoria();
-                listarCategorias();
+            c.setIdCliente(Integer.parseInt(txtidcliente.getText()));
+            c.setNombres(txtnombre.getText());
+            c.setApellidos(txtapellido.getText());
+            c.setDocumento(txtdocumento.getText());
+            c.setDireccion(txtdireccion.getText());
+            c.setTelefono(txttelefono.getText());
+            c.setCorreo(txtcorreo.getText());
+            if (auClientes.editar(c)) {
+                //JOptionPane.showMessageDialog(null, "Se modificó con éxito el cliente");
+                MenuPrinci m = new MenuPrinci();
+                m.exito("Se modificó con éxito el cliente");
+                limpiarTablaClientes();
+                listarClientes();
                 limpiarCampos();
             }
-        }*/
+            else{
+            MenuPrinci m = new MenuPrinci();
+            m.error("No se pudo modificar el cliente");
+            }
+        }
 
     }//GEN-LAST:event_btneditarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         // TODO add your handling code here:
-        /*if (!txtidcategoria.getText().isEmpty()) {
-            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar la categoria?","Confirmar",2);
+        if (!txtidcliente.getText().isEmpty()) {
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar el cliente?","Confirmar",2);
             if(confirmacion == 0){
-                ct.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
-                auCt.eliminar(ct);
-                limpiarTablaCategoria();
-                listarCategorias();
+                c.setIdCliente(Integer.parseInt(txtidcliente.getText()));
+                auClientes.eliminar(c);
+                limpiarTablaClientes();
+                listarClientes();
                 limpiarCampos();
-                JOptionPane.showMessageDialog(null, "Se eliminó con éxito");
+                //JOptionPane.showMessageDialog(null, "Se eliminó con éxito");
+                MenuPrinci m = new MenuPrinci();
+                m.exito("Se eliminó con éxito");
+                
             }
         }else{
-            JOptionPane.showMessageDialog(null, "Seleccione una categoria");
-        }*/
+            MenuPrinci m = new MenuPrinci();
+            m.warning("Seleccione un cliente");
+            //JOptionPane.showMessageDialog(null, "Seleccione un cliente");
+        }
 
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
         // BUSCAR
-        /*ct.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
-        if(auCt.buscar(ct)){
-            txtidcategoria.setText(ct.getIdCategoria()+"");
-            txtnombreCategoria.setText(ct.getNomCategoria()+"");
+        c.setDocumento(txtdocumento.getText());
+        if(auClientes.buscar(c)){
+            txtidcliente.setText(c.getIdCliente()+"");
+            txtnombre.setText(c.getNombres()+"");
+            txtapellido.setText(c.getApellidos()+"");
+            txtdocumento.setText(c.getDocumento()+"");
+            txtdireccion.setText(c.getDireccion()+"");
+            txttelefono.setText(c.getTelefono()+"");
+            txtcorreo.setText(c.getCorreo()+"");
 
         }else{
-            JOptionPane.showMessageDialog(null, "La categoria no existe");
+            MenuPrinci m = new MenuPrinci();
+            m.warning("El cliente no existe");
+            //JOptionPane.showMessageDialog(null, "El cliente no existe");
             limpiarCampos();
-        }*/
+        }
 
     }//GEN-LAST:event_btnbuscarActionPerformed
+
+    private void tbclientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbclientesMouseClicked
+        // TODO add your handling code here:
+        int fila=tbclientes.getSelectedRow();
+        txtidcliente.setText(tbclientes.getValueAt(fila, 0).toString());
+        txtnombre.setText(tbclientes.getValueAt(fila, 1).toString());
+        txtapellido.setText(tbclientes.getValueAt(fila, 2).toString());
+        txtdocumento.setText(tbclientes.getValueAt(fila, 3).toString());
+        txtdireccion.setText(tbclientes.getValueAt(fila, 4).toString());
+        txttelefono.setText(tbclientes.getValueAt(fila, 5).toString());
+        txtcorreo.setText(tbclientes.getValueAt(fila, 6).toString());
+        
+    }//GEN-LAST:event_tbclientesMouseClicked
 
     
     //limpiar campos

@@ -3,7 +3,6 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="undecorated" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -47,14 +46,14 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="contenedor" max="32767" attributes="0"/>
+                  <Component id="contenedor" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jPanel2" max="32767" attributes="0"/>
-              <Component id="contenedor" alignment="0" max="32767" attributes="0"/>
+              <Component id="contenedor" alignment="0" min="-2" pref="568" max="-2" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -79,7 +78,6 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnsalidas" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnentradas" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btncategorias" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnusuarios" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -92,6 +90,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Component id="btnclientes" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btncategorias" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -172,8 +171,11 @@
                   <Color blue="91" green="1c" red="32" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="ENTRADAS"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
                 <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
-                  <Value id="KEYBOARD_ARROW_UP"/>
+                  <Value id="INPUT"/>
                 </Property>
               </Properties>
               <Events>
@@ -187,7 +189,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="SALIDAS"/>
                 <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
-                  <Value id="KEYBOARD_ARROW_DOWN"/>
+                  <Value id="OPEN_IN_NEW"/>
                 </Property>
               </Properties>
               <Events>
@@ -213,7 +215,7 @@
             <Component class="RSMaterialComponent.RSButtonMaterialIconDos" name="btnsalir">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="91" green="1c" red="32" type="rgb"/>
+                  <Color blue="33" green="0" red="ff" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="SALIR"/>
                 <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
@@ -258,9 +260,6 @@
                   <Color blue="91" green="1c" red="32" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="PROVEEDOR"/>
-                <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
-                  <Value id="GROUP_WORK"/>
-                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnproveedorActionPerformed"/>
@@ -273,17 +272,20 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[940, 0]"/>
+            </Property>
           </Properties>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="578" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="940" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="568" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>

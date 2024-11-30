@@ -76,7 +76,7 @@ public class Categorias extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Registro de Categorias");
 
-        jPanel1.setBackground(new java.awt.Color(171, 180, 186));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -172,6 +172,7 @@ public class Categorias extends javax.swing.JPanel {
             }
         });
 
+        btneliminar.setBackground(new java.awt.Color(255, 0, 51));
         btneliminar.setText("Eliminar");
         btneliminar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.DELETE);
         btneliminar.setRound(25);

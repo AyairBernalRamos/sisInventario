@@ -10,30 +10,32 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import modelo.clientes;
+import modelo.proveedor;
 import modelo.conexion;
 
 /**
  *
  * @author Ayair Martin
  */
-public class AuClientes {
+public class DaoProveedor {
+    
     Connection con;
     conexion cn = new conexion();
     PreparedStatement ps;
     ResultSet rs;
     
-    public boolean insertar(clientes c){
-        String SQL="INSERT INTO cliente (nombres, apellidos, documento, direccion, telefono, correo) VALUES (?,?,?,?,?,?)";
+    public boolean insertar(proveedor p){
+        String SQL="INSERT INTO proveedor (nombres, apellidos, documento, Rsocial, direccion, telefono, correo) VALUES (?,?,?,?,?,?,?)";
         try{
             con = cn.conectar();
             ps=con.prepareStatement(SQL);
-            ps.setString(1, c.getNombres());
-            ps.setString(2, c.getApellidos());
-            ps.setString(3, c.getDocumento());
-            ps.setString(4, c.getDireccion());
-            ps.setString(5, c.getTelefono());
-            ps.setString(6, c.getCorreo());
+            ps.setString(1, p.getNombres());
+            ps.setString(2, p.getApellidos());
+            ps.setString(3, p.getDocumento());
+            ps.setString(4, p.getRsocial());
+            ps.setString(5, p.getDireccion());
+            ps.setString(6, p.getTelefono());
+            ps.setString(7, p.getCorreo());
             int n = ps.executeUpdate();
             if(n!=0){
                 return true;
@@ -48,24 +50,25 @@ public class AuClientes {
         
         
     }  
-    //metodo para listar los clientes que estan en la bd para mostrar en el programa
+    
     public List Listar(){
-        List<clientes> lista = new ArrayList<>();
-        String SQL="SELECT * FROM cliente";
+        List<proveedor> lista = new ArrayList<>();
+        String SQL="SELECT * FROM proveedor";
         
         try{
             con = cn.conectar();
             ps=con.prepareStatement(SQL);
             rs = ps.executeQuery();
             while(rs.next()){
-                clientes c = new clientes();
-                c.setIdCliente(rs.getInt(1));
+                proveedor c = new proveedor();
+                c.setIdProveedor(rs.getInt(1));
                 c.setNombres(rs.getString(2));
                 c.setApellidos(rs.getString(3));
                 c.setDocumento(rs.getString(4));
-                c.setDireccion(rs.getString(5));
-                c.setTelefono(rs.getString(6));
-                c.setCorreo(rs.getString(7));
+                c.setRsocial(rs.getString(5));
+                c.setDireccion(rs.getString(6));
+                c.setTelefono(rs.getString(7));
+                c.setCorreo(rs.getString(8));
                 lista.add(c);               
             }
             
@@ -78,19 +81,48 @@ public class AuClientes {
         
     }
     
+    //buscar
+    public boolean buscar(proveedor c){
+        String SQL="SELECT * FROM proveedor WHERE idproveedor=?";
+        try{
+            con = cn.conectar();
+            ps=con.prepareStatement(SQL);
+            ps.setInt(1, c.getIdProveedor());
+            rs = ps.executeQuery();
+            if(rs.next()){
+                c.setIdProveedor(rs.getInt(1));
+                c.setNombres(rs.getString(2));
+                c.setApellidos(rs.getString(3));
+                c.setDocumento(rs.getString(4));
+                c.setRsocial(rs.getString(5));
+                c.setDireccion(rs.getString(6));
+                c.setTelefono(rs.getString(7));
+                c.setCorreo(rs.getString(8));
+                return true;
+            }else{
+                return false;
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    }
+    
     //metodo editar
-    public boolean editar(clientes c){
-        String SQL="UPDATE cliente set nombres=?, apellidos=?, documento=?, direccion=?, telefono=?, correo=? WHERE idCliente=?";
+    public boolean editar(proveedor c){
+        String SQL="UPDATE proveedor set nombres=?, apellidos=?, documento=?, Rsocial=?, direccion=?, telefono=?, correo=? WHERE idproveedor=?";
         try{
             con = cn.conectar();
             ps=con.prepareStatement(SQL);
             ps.setString(1, c.getNombres());
             ps.setString(2, c.getApellidos());
             ps.setString(3, c.getDocumento());
-            ps.setString(4, c.getDireccion());
-            ps.setString(5, c.getTelefono());
-            ps.setString(6, c.getCorreo());
-            ps.setInt(7, c.getIdCliente());
+            ps.setString(4, c.getRsocial());
+            ps.setString(5, c.getDireccion());
+            ps.setString(6, c.getTelefono());
+            ps.setString(7, c.getCorreo());
+            ps.setInt(8, c.getIdProveedor());
             int n = ps.executeUpdate();
             if(n!=0){
                 return true;
@@ -106,12 +138,12 @@ public class AuClientes {
     }
     
     //eliminar
-    public boolean eliminar(clientes c){
-        String SQL="DELETE FROM cliente WHERE idCliente=?";
+    public boolean eliminar(proveedor c){
+        String SQL="DELETE FROM proveedor WHERE idproveedor=?";
         try{
             con = cn.conectar();
             ps=con.prepareStatement(SQL);
-            ps.setInt(1, c.getIdCliente());
+            ps.setInt(1, c.getIdProveedor());
             int n = ps.executeUpdate();
             if(n!=0){
                 return true;
@@ -124,22 +156,24 @@ public class AuClientes {
             return false;
         }
     }
+    
     //buscar
-    public boolean buscar(clientes c){
-        String SQL="SELECT * FROM cliente WHERE documento=?";
+    public boolean buscarDocumento(proveedor c){
+        String SQL="SELECT * FROM proveedor WHERE documento=?";
         try{
             con = cn.conectar();
             ps=con.prepareStatement(SQL);
             ps.setString(1, c.getDocumento());
             rs = ps.executeQuery();
             if(rs.next()){
-                c.setIdCliente(rs.getInt(1));
+                c.setIdProveedor(rs.getInt(1));
                 c.setNombres(rs.getString(2));
                 c.setApellidos(rs.getString(3));
                 c.setDocumento(rs.getString(4));
-                c.setDireccion(rs.getString(5));
-                c.setTelefono(rs.getString(6));
-                c.setCorreo(rs.getString(7));
+                c.setRsocial(rs.getString(5));
+                c.setDireccion(rs.getString(6));
+                c.setTelefono(rs.getString(7));
+                c.setCorreo(rs.getString(8));
                 return true;
             }else{
                 return false;
@@ -150,7 +184,6 @@ public class AuClientes {
             return false;
         }
     }
-    
     
     
 }

@@ -6,6 +6,7 @@ package vista;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import notification.Notification;
 
 /**
  *
@@ -19,10 +20,10 @@ public class MenuPrinci extends javax.swing.JFrame {
     public MenuPrinci() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setBackground(new Color(0,0,0,0));
+        //this.setBackground(new Color(0,0,0,0));
         
         Home h = new Home();
-        h.setSize(1000,900);
+        h.setSize(1500,1500);
         h.setLocation(0,0);
         
         contenedor.removeAll();
@@ -57,7 +58,6 @@ public class MenuPrinci extends javax.swing.JFrame {
         contenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -87,7 +87,8 @@ public class MenuPrinci extends javax.swing.JFrame {
 
         btnentradas.setBackground(new java.awt.Color(50, 28, 145));
         btnentradas.setText("ENTRADAS");
-        btnentradas.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.KEYBOARD_ARROW_UP);
+        btnentradas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnentradas.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.INPUT);
         btnentradas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnentradasActionPerformed(evt);
@@ -96,7 +97,7 @@ public class MenuPrinci extends javax.swing.JFrame {
 
         btnsalidas.setBackground(new java.awt.Color(50, 28, 145));
         btnsalidas.setText("SALIDAS");
-        btnsalidas.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.KEYBOARD_ARROW_DOWN);
+        btnsalidas.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.OPEN_IN_NEW);
         btnsalidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalidasActionPerformed(evt);
@@ -112,7 +113,7 @@ public class MenuPrinci extends javax.swing.JFrame {
             }
         });
 
-        btnsalir.setBackground(new java.awt.Color(50, 28, 145));
+        btnsalir.setBackground(new java.awt.Color(255, 0, 51));
         btnsalir.setText("SALIR");
         btnsalir.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.EXIT_TO_APP);
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +142,6 @@ public class MenuPrinci extends javax.swing.JFrame {
 
         btnproveedor.setBackground(new java.awt.Color(50, 28, 145));
         btnproveedor.setText("PROVEEDOR");
-        btnproveedor.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.GROUP_WORK);
         btnproveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnproveedorActionPerformed(evt);
@@ -161,7 +161,6 @@ public class MenuPrinci extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnsalidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnentradas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btncategorias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnusuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +170,8 @@ public class MenuPrinci extends javax.swing.JFrame {
                             .addComponent(btnacercade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnhome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
-                    .addComponent(btnclientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnclientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btncategorias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,16 +202,17 @@ public class MenuPrinci extends javax.swing.JFrame {
         );
 
         contenedor.setBackground(new java.awt.Color(255, 255, 255));
+        contenedor.setPreferredSize(new java.awt.Dimension(940, 0));
 
         javax.swing.GroupLayout contenedorLayout = new javax.swing.GroupLayout(contenedor);
         contenedor.setLayout(contenedorLayout);
         contenedorLayout.setHorizontalGroup(
             contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 578, Short.MAX_VALUE)
+            .addGap(0, 940, Short.MAX_VALUE)
         );
         contenedorLayout.setVerticalGroup(
             contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 568, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -221,12 +222,12 @@ public class MenuPrinci extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -249,6 +250,11 @@ public class MenuPrinci extends javax.swing.JFrame {
         btncategorias.setSelected(true);
         btnhome.setSelected(false);
         btnclientes.setSelected(false);
+        btnproveedor.setSelected(false);
+        btnentradas.setSelected(false);
+        btnsalidas.setSelected(false);
+        btnusuarios.setSelected(false);
+        btnacercade.setSelected(false);
         
         
         Categorias c = new Categorias();
@@ -269,9 +275,14 @@ public class MenuPrinci extends javax.swing.JFrame {
         btncategorias.setSelected(false);
         btnclientes.setSelected(true);
         btnhome.setSelected(false);
+        btnentradas.setSelected(false);
+        btnproveedor.setSelected(false);
+        btnsalidas.setSelected(false);
+        btnusuarios.setSelected(false);
+        btnacercade.setSelected(false);
         
         Clientes c = new Clientes();
-        c.setSize(982,840);
+        c.setSize(982,940);
         c.setLocation(0,0);
         
         contenedor.removeAll();
@@ -285,10 +296,49 @@ public class MenuPrinci extends javax.swing.JFrame {
 
     private void btnentradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnentradasActionPerformed
         // TODO add your handling code here:
+        // boton entradas
+        btncategorias.setSelected(false);
+        btnclientes.setSelected(false);
+        btnhome.setSelected(false);
+        btnentradas.setSelected(true);
+        btnproveedor.setSelected(false);
+        btnsalidas.setSelected(false);
+        btnusuarios.setSelected(false);
+        btnacercade.setSelected(false);
+        
+        Entradas c = new Entradas();
+        c.setSize(1000,1200);
+        c.setLocation(0,0);
+        
+        contenedor.removeAll();
+        contenedor.add(c,BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
+        
     }//GEN-LAST:event_btnentradasActionPerformed
 
     private void btnsalidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalidasActionPerformed
         // TODO add your handling code here:
+        // boton salidas
+        btncategorias.setSelected(false);
+        btnclientes.setSelected(false);
+        btnhome.setSelected(false);
+        btnentradas.setSelected(false);
+        btnproveedor.setSelected(false);
+        btnsalidas.setSelected(true);
+        btnusuarios.setSelected(false);
+        btnacercade.setSelected(false);
+        
+        Salidas c = new Salidas();
+        c.setSize(1000,800);
+        c.setLocation(0,0);
+        
+        contenedor.removeAll();
+        contenedor.add(c,BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
+        
+        
     }//GEN-LAST:event_btnsalidasActionPerformed
 
     private void btnusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnusuariosActionPerformed
@@ -301,12 +351,32 @@ public class MenuPrinci extends javax.swing.JFrame {
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
         // TODO add your handling code here:
-        
+        login m = new login();
+        m.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnsalirActionPerformed
 
     private void btnproveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnproveedorActionPerformed
         // TODO add your handling code here:
+        // boton clientes
+        btncategorias.setSelected(false);
+        btnclientes.setSelected(false);
+        btnhome.setSelected(false);
+        btnentradas.setSelected(false);
+        btnproveedor.setSelected(true);
+        btnsalidas.setSelected(false);
+        btnusuarios.setSelected(false);
+        btnacercade.setSelected(false);
+        
+        Proveedor c = new Proveedor();
+        c.setSize(1000,1200);
+        c.setLocation(0,0);
+        
+        contenedor.removeAll();
+        contenedor.add(c,BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
+        
     }//GEN-LAST:event_btnproveedorActionPerformed
 
     private void btnhomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhomeActionPerformed
@@ -315,6 +385,9 @@ public class MenuPrinci extends javax.swing.JFrame {
         btnhome.setSelected(true);
         btncategorias.setSelected(false);
         btnclientes.setSelected(false);
+        btnsalidas.setSelected(false);
+        btnusuarios.setSelected(false);
+        btnacercade.setSelected(false);
         Home h = new Home();
         h.setSize(1000,900);
         h.setLocation(0,0);
@@ -360,6 +433,22 @@ public class MenuPrinci extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void exito(String texto){
+        Notification panel = new Notification(this, Notification.Type.SUCCESS, Notification.Location.TOP_RIGHT, texto);
+        panel.showNotification();
+    }
+    
+    public void warning(String texto){
+        Notification panel = new Notification(this, Notification.Type.WARNING, Notification.Location.TOP_RIGHT, texto);
+        panel.showNotification();
+    }
+    
+    public void error(String texto){
+        Notification panel = new Notification(this, Notification.Type.ERROR, Notification.Location.TOP_RIGHT, texto);
+        panel.showNotification();
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btnacercade;

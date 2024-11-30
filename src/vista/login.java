@@ -9,6 +9,7 @@ import controlador.AUsuarios;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import modelo.usuarios;
+import notification.Notification;
 //prueba de rama desarrrollo
 /**
  *
@@ -27,7 +28,7 @@ public class login extends javax.swing.JFrame {
         initComponents();
         
         this.setLocationRelativeTo(null);
-        this.setBackground(new Color(0,0,0,0));
+        //this.setBackground(new Color(0,0,0,0));
     }
 
     /**
@@ -51,7 +52,6 @@ public class login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(14, 76, 117));
-        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(102, 105, 248));
 
@@ -179,20 +179,26 @@ public class login extends javax.swing.JFrame {
         // BOTON INGRESAR
         us = au.login(txtusuario.getText(), txtpassword.getText());
         if (us.getUsuario()!=null && us.getPassword()!=null) {
-            JOptionPane.showMessageDialog(null, "Bienvenid@");
+            //JOptionPane.showMessageDialog(null, "Bienvenid@");
+            Notification panel = new Notification(this, Notification.Type.SUCCESS, Notification.Location.TOP_RIGHT, "Bienvenid@");
+            panel.showNotification();
             MenuPrinci m = new MenuPrinci();
             m.setVisible(true);
             dispose();
             
         }else{
-            JOptionPane.showMessageDialog(null, "Acceso denegado");
+            //JOptionPane.showMessageDialog(null, "Acceso denegado");
+             Notification panel = new Notification(this, Notification.Type.WARNING, Notification.Location.TOP_RIGHT, "Acceso denegado");
+            panel.showNotification();
+            
+            
         }
         
     }//GEN-LAST:event_btningresarActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
         // BOTON SALIR
-        dispose();
+        System.exit(0);
         
     }//GEN-LAST:event_btnsalirActionPerformed
 

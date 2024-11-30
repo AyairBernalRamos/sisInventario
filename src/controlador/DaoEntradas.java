@@ -10,30 +10,32 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import modelo.clientes;
+import modelo.entradas;
 import modelo.conexion;
 
 /**
  *
  * @author Ayair Martin
  */
-public class AuClientes {
+public class DaoEntradas {
     Connection con;
     conexion cn = new conexion();
     PreparedStatement ps;
     ResultSet rs;
     
-    public boolean insertar(clientes c){
-        String SQL="INSERT INTO cliente (nombres, apellidos, documento, direccion, telefono, correo) VALUES (?,?,?,?,?,?)";
+    public boolean insertar(entradas c){
+        String SQL="INSERT INTO entrada (nomProd,stock,idCategoria,fecha,idProveedor,precioEntrada,precioVenta,total) VALUES (?,?,?,?,?,?,?,?)";
         try{
             con = cn.conectar();
             ps=con.prepareStatement(SQL);
-            ps.setString(1, c.getNombres());
-            ps.setString(2, c.getApellidos());
-            ps.setString(3, c.getDocumento());
-            ps.setString(4, c.getDireccion());
-            ps.setString(5, c.getTelefono());
-            ps.setString(6, c.getCorreo());
+            ps.setString(1, c.getNomProd());
+            ps.setInt(2, c.getStock());
+            ps.setInt(3, c.getIdCategoria());
+            ps.setDate(4, c.getFecha());
+            ps.setInt(5, c.getIdProveedor());
+            ps.setDouble(6, c.getPrecioEntrada());
+            ps.setDouble(7, c.getPrecioVenta());
+            ps.setDouble(8, c.getTotal());
             int n = ps.executeUpdate();
             if(n!=0){
                 return true;
@@ -48,24 +50,27 @@ public class AuClientes {
         
         
     }  
+    
     //metodo para listar los clientes que estan en la bd para mostrar en el programa
     public List Listar(){
-        List<clientes> lista = new ArrayList<>();
-        String SQL="SELECT * FROM cliente";
+        List<entradas> lista = new ArrayList<>();
+        String SQL="SELECT * FROM entrada";
         
         try{
             con = cn.conectar();
             ps=con.prepareStatement(SQL);
             rs = ps.executeQuery();
             while(rs.next()){
-                clientes c = new clientes();
-                c.setIdCliente(rs.getInt(1));
-                c.setNombres(rs.getString(2));
-                c.setApellidos(rs.getString(3));
-                c.setDocumento(rs.getString(4));
-                c.setDireccion(rs.getString(5));
-                c.setTelefono(rs.getString(6));
-                c.setCorreo(rs.getString(7));
+                entradas c = new entradas();
+                c.setIdentrada(rs.getInt(1));
+                c.setNomProd(rs.getString(2));
+                c.setStock(rs.getInt(3));
+                c.setIdCategoria(rs.getInt(4));
+                c.setFecha(rs.getDate(5));
+                c.setIdProveedor(rs.getInt(6));
+                c.setPrecioEntrada(rs.getDouble(7));
+                c.setPrecioVenta(rs.getDouble(8));
+                c.setTotal(rs.getDouble(9));
                 lista.add(c);               
             }
             
@@ -79,18 +84,20 @@ public class AuClientes {
     }
     
     //metodo editar
-    public boolean editar(clientes c){
-        String SQL="UPDATE cliente set nombres=?, apellidos=?, documento=?, direccion=?, telefono=?, correo=? WHERE idCliente=?";
+    public boolean editar(entradas c){
+        String SQL="UPDATE entrada set nomProd=?, stock=?, idCategoria=?, fecha=?, idProveedor=?, precioEntrada=?, precioVenta=?, total=? WHERE identrada=?";
         try{
             con = cn.conectar();
             ps=con.prepareStatement(SQL);
-            ps.setString(1, c.getNombres());
-            ps.setString(2, c.getApellidos());
-            ps.setString(3, c.getDocumento());
-            ps.setString(4, c.getDireccion());
-            ps.setString(5, c.getTelefono());
-            ps.setString(6, c.getCorreo());
-            ps.setInt(7, c.getIdCliente());
+            ps.setString(1, c.getNomProd());
+            ps.setInt(2, c.getStock());
+            ps.setInt(3, c.getIdCategoria());
+            ps.setDate(4, c.getFecha());
+            ps.setInt(5, c.getIdProveedor());
+            ps.setDouble(6, c.getPrecioEntrada());
+            ps.setDouble(7, c.getPrecioVenta());
+            ps.setDouble(8, c.getTotal());
+            ps.setInt(9, c.getIdentrada());
             int n = ps.executeUpdate();
             if(n!=0){
                 return true;
@@ -106,12 +113,12 @@ public class AuClientes {
     }
     
     //eliminar
-    public boolean eliminar(clientes c){
-        String SQL="DELETE FROM cliente WHERE idCliente=?";
+    public boolean eliminar(entradas c){
+        String SQL="DELETE FROM entrada WHERE identrada=?";
         try{
             con = cn.conectar();
             ps=con.prepareStatement(SQL);
-            ps.setInt(1, c.getIdCliente());
+            ps.setInt(1, c.getIdentrada());
             int n = ps.executeUpdate();
             if(n!=0){
                 return true;
@@ -125,21 +132,23 @@ public class AuClientes {
         }
     }
     //buscar
-    public boolean buscar(clientes c){
-        String SQL="SELECT * FROM cliente WHERE documento=?";
+    public boolean buscar(entradas c){
+        String SQL="SELECT * FROM entrada WHERE identrada=?";
         try{
             con = cn.conectar();
             ps=con.prepareStatement(SQL);
-            ps.setString(1, c.getDocumento());
+            ps.setInt(1, c.getIdentrada());
             rs = ps.executeQuery();
             if(rs.next()){
-                c.setIdCliente(rs.getInt(1));
-                c.setNombres(rs.getString(2));
-                c.setApellidos(rs.getString(3));
-                c.setDocumento(rs.getString(4));
-                c.setDireccion(rs.getString(5));
-                c.setTelefono(rs.getString(6));
-                c.setCorreo(rs.getString(7));
+                c.setIdentrada(rs.getInt(1));
+                c.setNomProd(rs.getString(2));
+                c.setStock(rs.getInt(3));
+                c.setIdCategoria(rs.getInt(4));
+                c.setFecha(rs.getDate(5));
+                c.setIdProveedor(rs.getInt(6));
+                c.setPrecioEntrada(rs.getDouble(7));
+                c.setPrecioVenta(rs.getDouble(8));
+                c.setTotal(rs.getDouble(9));
                 return true;
             }else{
                 return false;
@@ -150,6 +159,7 @@ public class AuClientes {
             return false;
         }
     }
+    
     
     
     
