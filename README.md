@@ -1,4 +1,10 @@
 Nuestro Proyecto Sistema de Inventario:
+
+https://github.com/user-attachments/assets/4a2e97fe-c641-4ea1-886c-c16396ac3de2
+
+
+
+
 Aquí se muestra nuestro login:
 ![image](https://github.com/user-attachments/assets/ec25171a-bb4b-4360-b359-5df061e9b39d)
 
