@@ -33,4 +33,8 @@ Aparatado de Salidas:
 - Y finalmente tenemos para realizar otra consulta o una nueva salida y a su lado derecho se registrará los numeros de salidas:
   ![image](https://github.com/user-attachments/assets/9b5e9611-2d1e-4d58-8ba8-4c98999936dd)
 
+Base de datos ESQUEMA: 
+![image](https://github.com/user-attachments/assets/d334b53f-83ec-4167-bbcc-01d612539f2a)
+
+
 
