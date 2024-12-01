@@ -11,8 +11,7 @@ import java.sql.Date;
 public class salidas {
     
     int idSalida;
-    int idEntrada;
-    int cantidad;
+    String numSalida;
     int idCliente;
     Date fecha;
     double subtotal;
@@ -22,10 +21,9 @@ public class salidas {
     public salidas() {
     }
 
-    public salidas(int idSalida, int idEntrada, int cantidad, int idCliente, Date fecha, double subtotal, double igv, double total) {
+    public salidas(int idSalida, String numSalida, int idCliente, Date fecha, double subtotal, double igv, double total) {
         this.idSalida = idSalida;
-        this.idEntrada = idEntrada;
-        this.cantidad = cantidad;
+        this.numSalida = numSalida;
         this.idCliente = idCliente;
         this.fecha = fecha;
         this.subtotal = subtotal;
@@ -33,28 +31,22 @@ public class salidas {
         this.total = total;
     }
 
+    public String getNumSalida() {
+        return numSalida;
+    }
+
+    public void setNumSalida(String numSalida) {
+        this.numSalida = numSalida;
+    }
+
+    
+
     public int getIdSalida() {
         return idSalida;
     }
 
     public void setIdSalida(int idSalida) {
         this.idSalida = idSalida;
-    }
-
-    public int getIdEntrada() {
-        return idEntrada;
-    }
-
-    public void setIdEntrada(int idEntrada) {
-        this.idEntrada = idEntrada;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
     }
 
     public int getIdCliente() {
