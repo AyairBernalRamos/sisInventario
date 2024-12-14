@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteProveedores" language="groovy" pageWidth="700" pageHeight="842" columnWidth="660" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="455a7c14-58bb-4228-916b-480b359f8228">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     proveedor.`idproveedor` AS proveedor_idproveedor,
+     proveedor.`nombres` AS proveedor_nombres,
+     proveedor.`apellidos` AS proveedor_apellidos,
+     proveedor.`documento` AS proveedor_documento,
+     proveedor.`Rsocial` AS proveedor_Rsocial,
+     proveedor.`direccion` AS proveedor_direccion,
+     proveedor.`telefono` AS proveedor_telefono,
+     proveedor.`correo` AS proveedor_correo
+FROM
+     `proveedor` proveedor]]>
+	</queryString>
+	<field name="proveedor_idproveedor" class="java.lang.Integer"/>
+	<field name="proveedor_nombres" class="java.lang.String"/>
+	<field name="proveedor_apellidos" class="java.lang.String"/>
+	<field name="proveedor_documento" class="java.lang.String"/>
+	<field name="proveedor_Rsocial" class="java.lang.String"/>
+	<field name="proveedor_direccion" class="java.lang.String"/>
+	<field name="proveedor_telefono" class="java.lang.String"/>
+	<field name="proveedor_correo" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="114" splitType="Stretch">
+			<staticText>
+				<reportElement x="223" y="0" width="130" height="20" uuid="912df70e-dffa-43b2-8b9b-bf4cbb31114d"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lista de Proveedores]]></text>
+			</staticText>
+			<image>
+				<reportElement x="239" y="20" width="138" height="92" uuid="1f202b23-eee4-4585-b14d-2148a09964d6"/>
+				<imageExpression><![CDATA["C:\\Users\\Ayair Martin\\Downloads\\logogrupo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<rectangle>
+				<reportElement x="14" y="2" width="626" height="20" backcolor="#CCFF99" uuid="ffac0c3a-a7f4-47d2-8552-e90cde41e69b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="24" y="2" width="30" height="20" uuid="f2938259-b4bf-42d6-98d5-333ee5c57ba8"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="2" width="59" height="20" uuid="b206065d-44f7-424d-858f-46821a91e6fe"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombres]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="2" width="100" height="20" uuid="c183d2cc-d5c8-4776-97fa-5d5f0bb1f1e4"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="2" width="83" height="20" uuid="1df813a0-02f1-4eaf-b184-c2c05b5fc63a"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="2" width="77" height="20" uuid="9af1f63a-773b-45f8-b351-f0d9918aa552"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R. Social]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="461" y="2" width="58" height="20" uuid="83b63a68-cbf6-4ec0-b603-8a86c893aac7"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Teléfono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="569" y="2" width="53" height="20" uuid="616bb70a-491a-4f93-abad-6c7d67b15bef"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Correo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="24" y="0" width="30" height="20" uuid="b71f9d59-eab8-4ddc-bc2f-84c245823f1c"/>
+				<textFieldExpression><![CDATA[$F{proveedor_idproveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="66" y="1" width="100" height="20" uuid="673a6b51-6533-4463-9ad0-bdddcb8f7acc"/>
+				<textFieldExpression><![CDATA[$F{proveedor_nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="166" y="1" width="100" height="20" uuid="b09fbf8a-f882-4ebd-8ae9-206401ad31e1"/>
+				<textFieldExpression><![CDATA[$F{proveedor_apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="281" y="1" width="83" height="20" uuid="7deabbe1-0344-4922-af08-ae18379ef584"/>
+				<textFieldExpression><![CDATA[$F{proveedor_documento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="1" width="77" height="20" uuid="de440efd-c8fc-4043-bb7d-4c9ab502f8b2"/>
+				<textFieldExpression><![CDATA[$F{proveedor_Rsocial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="461" y="1" width="58" height="20" uuid="ccd81c0f-4329-4cd7-91bd-453bafb29a7d"/>
+				<textFieldExpression><![CDATA[$F{proveedor_telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="540" y="2" width="100" height="20" uuid="dbda1f5e-c0c9-4d66-80a6-eec5a9406b18"/>
+				<textFieldExpression><![CDATA[$F{proveedor_correo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

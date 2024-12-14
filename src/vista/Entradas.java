@@ -6,15 +6,27 @@ package vista;
 
 import controlador.AuCategorias;
 import controlador.DaoEntradas;
+import controlador.DaoProductos;
 import controlador.DaoProveedor;
+import java.io.File;
+import java.sql.Connection;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Categoria;
+import modelo.conexion;
 import modelo.entradas;
+import modelo.productos;
 import modelo.proveedor;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -27,6 +39,8 @@ public class Entradas extends javax.swing.JPanel {
     entradas e = new entradas();
     Categoria ct = new Categoria();
     proveedor pr = new proveedor();
+    productos p = new productos();
+    DaoProductos daoPro = new DaoProductos();
     DaoEntradas dao = new DaoEntradas();
     AuCategorias daoC = new AuCategorias();
     DaoProveedor daoP = new DaoProveedor();
@@ -38,6 +52,7 @@ public class Entradas extends javax.swing.JPanel {
     public Entradas() {
         initComponents();
         listarEntradas();
+        numProducto();
     }
     
     //metodo para listar
@@ -47,7 +62,7 @@ public class Entradas extends javax.swing.JPanel {
         Object[] ob = new Object[9];
         for(int i=0;i<lista.size();i++){
             ob[0]=lista.get(i).getIdentrada();
-            ob[1]=lista.get(i).getNomProd();
+            ob[1]=lista.get(i).getIdproducto();
             ob[2]=lista.get(i).getStock();
             ob[3]=lista.get(i).getIdCategoria();
             ob[4]=lista.get(i).getFecha();
@@ -60,6 +75,17 @@ public class Entradas extends javax.swing.JPanel {
             
         }
         tablaentradas.setModel(modelo);
+    }
+    
+    void numProducto(){
+        int numero = daoPro.numProducto();
+        if (numero == 0) {
+            txtidproducto.setText("1");
+        }else{
+            int i = numero;
+            i=i+1;
+            txtidproducto.setText(i+"");
+        }
     }
     
 
@@ -78,7 +104,7 @@ public class Entradas extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtidentrada = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtnombre = new javax.swing.JTextField();
+        txtnombreP = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtstock = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -109,6 +135,13 @@ public class Entradas extends javax.swing.JPanel {
         btnbuscar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btneditar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btneliminar = new RSMaterialComponent.RSButtonMaterialIconDos();
+        btnreporEntrada = new RSMaterialComponent.RSButtonMaterialIconDos();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        btnbuscarproducto = new RSMaterialComponent.RSButtonMaterialIconDos();
+        jLabel8 = new javax.swing.JLabel();
+        txtidproducto = new javax.swing.JTextField();
+        btnreporProducto = new RSMaterialComponent.RSButtonMaterialIconDos();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1000, 700));
@@ -124,7 +157,7 @@ public class Entradas extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("ID:");
+        jLabel2.setText("ID Entrada:");
 
         txtidentrada.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
 
@@ -132,7 +165,7 @@ public class Entradas extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Nombre Producto:");
 
-        txtnombre.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
+        txtnombreP.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -192,28 +225,25 @@ public class Entradas extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtprecioventa)
-                    .addComponent(txtstock)
-                    .addComponent(txtnombre)
-                    .addComponent(txtprecioentrada)
-                    .addComponent(btn_guardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(datefecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txttotal, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtidentrada, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel9))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btn_guardar, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                    .addComponent(txttotal, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtprecioventa, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtprecioentrada, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(datefecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                    .addComponent(txtstock, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtidentrada))
+                    .addComponent(txtnombreP, javax.swing.GroupLayout.Alignment.LEADING))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,7 +255,7 @@ public class Entradas extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtnombreP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -372,13 +402,13 @@ public class Entradas extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel14))
                     .addComponent(btnbuscarproveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 21, Short.MAX_VALUE)
                 .addComponent(txtidproveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtproveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         tablaentradas.setModel(new javax.swing.table.DefaultTableModel(
@@ -386,7 +416,7 @@ public class Entradas extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID Producto", "Producto", "Stock", "ID Categoria", "Fecha", "ID Proveedor", "Precio Entrada", "Precio Venta", "Total"
+                "ID", "Producto", "Stock", "ID Categoria", "Fecha", "ID Proveedor", "Precio Entrada", "Precio Venta", "Total"
             }
         ));
         tablaentradas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -424,35 +454,113 @@ public class Entradas extends javax.swing.JPanel {
             }
         });
 
+        btnreporEntrada.setBackground(new java.awt.Color(255, 153, 153));
+        btnreporEntrada.setText("Entrada");
+        btnreporEntrada.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.INSERT_DRIVE_FILE);
+        btnreporEntrada.setRound(25);
+        btnreporEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreporEntradaActionPerformed(evt);
+            }
+        });
+
+        jPanel4.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(51, 102, 255));
+        jLabel16.setText("Buscar Producto");
+
+        btnbuscarproducto.setBackground(new java.awt.Color(51, 102, 255));
+        btnbuscarproducto.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SEARCH);
+        btnbuscarproducto.setRound(25);
+        btnbuscarproducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscarproductoActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("ID Producto:");
+
+        txtidproducto.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(txtidproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(btnbuscarproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel16)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtidproducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnbuscarproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btnreporProducto.setBackground(new java.awt.Color(255, 153, 153));
+        btnreporProducto.setText("Producto");
+        btnreporProducto.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.INSERT_DRIVE_FILE);
+        btnreporProducto.setRound(25);
+        btnreporProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreporProductoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(rSButtonMaterialIconDos1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
+                        .addGap(18, 18, 18)
                         .addComponent(btneditar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnreporEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnreporProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(144, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(83, 83, 83))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -467,15 +575,20 @@ public class Entradas extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btneditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnreporEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnreporProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btneditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -485,33 +598,18 @@ public class Entradas extends javax.swing.JPanel {
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
         // TODO add your handling code here:
-        //variables para la efcha
-        Calendar cal;
-        int d,me,a;
-        cal = datefecha.getCalendar();
-        d = cal.get(Calendar.DAY_OF_MONTH);
-        me = cal.get(Calendar.MONTH);
-        a = cal.get(Calendar.YEAR)-1900;
-        
-        e.setNomProd(txtnombre.getText());
-        e.setStock(Integer.parseInt(txtstock.getText()));
-        e.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
-        e.setFecha(new Date(a,me,d));
-        e.setIdProveedor(Integer.parseInt(txtidproveedor.getText()));
-        e.setPrecioEntrada(Double.parseDouble(txtprecioentrada.getText()));
-        e.setPrecioVenta(Double.parseDouble(txtprecioventa.getText()));
-        e.setTotal(Double.parseDouble(txttotal.getText()));
-        if(dao.insertar(e)){
-            //JOptionPane.showMessageDialog(null, "Cliente registrado con éxito");
-            MenuPrinci m = new MenuPrinci();
-            m.exito("Entrada registrado con éxito");
-            limpiarCampos();//llamamos al metodo limpiar
-            limpiarTabla();
-            listarEntradas();
+        p.setIdProducto(Integer.parseInt(txtidproducto.getText()));
+        if(daoPro.buscar(p)){
+            agregarEntrada(true);
+            
         }else{
-            MenuPrinci m = new MenuPrinci();
-            m.error("No se pudo registrar la entrada");
+            agregarEntrada(false);
+            
         }
+        
+        limpiarCampos();//llamamos al metodo limpiar
+        limpiarTabla();
+        listarEntradas();
 
     }//GEN-LAST:event_btn_guardarActionPerformed
 
@@ -529,8 +627,7 @@ public class Entradas extends javax.swing.JPanel {
             me = cal.get(Calendar.MONTH);
             a = cal.get(Calendar.YEAR)-1900;
 
-            e.setIdentrada(Integer.parseInt(txtidentrada.getText()));
-            e.setNomProd(txtnombre.getText());
+            e.setIdproducto(Integer.parseInt(txtidproducto.getText()));
             e.setStock(Integer.parseInt(txtstock.getText()));
             e.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
             e.setFecha(new Date(a,me,d));
@@ -538,6 +635,7 @@ public class Entradas extends javax.swing.JPanel {
             e.setPrecioEntrada(Double.parseDouble(txtprecioentrada.getText()));
             e.setPrecioVenta(Double.parseDouble(txtprecioventa.getText()));
             e.setTotal(Double.parseDouble(txttotal.getText()));
+            e.setIdentrada(Integer.parseInt(txtidentrada.getText()));
             if (dao.editar(e)) {
                 //JOptionPane.showMessageDialog(null, "Se modificó con éxito el cliente");
                 MenuPrinci m = new MenuPrinci();
@@ -580,13 +678,15 @@ public class Entradas extends javax.swing.JPanel {
         e.setIdentrada(Integer.parseInt(txtidentrada.getText()));
         if(dao.buscar(e)){
             txtidentrada.setText(e.getIdentrada()+"");
-            txtnombre.setText(e.getNomProd());
+            //txtnombreP.setText(e.getIdProd());
             txtstock.setText(e.getStock()+"");
             txtprecioentrada.setText(e.getPrecioEntrada()+"");
             txtprecioventa.setText(e.getPrecioVenta()+"");
             txttotal.setText(e.getTotal()+"");
             txtidcategoria.setText(e.getIdCategoria()+"");
+            txtidproducto.setText(e.getIdproducto()+"");
             txtidproveedor.setText(e.getIdProveedor()+"");
+            datefecha.setDate(e.getFecha());
             ct.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
             if(daoC.buscar(ct)){
                 txtcategoria.setText(ct.getNomCategoria()+"");
@@ -602,6 +702,13 @@ public class Entradas extends javax.swing.JPanel {
             }else{
                 txtproveedor.setText("ERROR");
             }
+            p.setIdProducto(Integer.parseInt(txtidproducto.getText()));
+            if (daoPro.buscar(p)) {
+                txtnombreP.setText(p.getNomProd());
+            }else{
+                txtproveedor.setText("ERROR");
+            }
+            
         }else{
             JOptionPane.showMessageDialog(null, "La entrada no existe");
             limpiarCampos();
@@ -645,7 +752,7 @@ public class Entradas extends javax.swing.JPanel {
         // TODO add your handling code here:
         int fila=tablaentradas.getSelectedRow();
         txtidentrada.setText(tablaentradas.getValueAt(fila, 0).toString());
-        txtnombre.setText(tablaentradas.getValueAt(fila, 1).toString());
+        txtidproducto.setText(tablaentradas.getValueAt(fila, 1).toString());
         txtstock.setText(tablaentradas.getValueAt(fila, 2).toString());
         txtidcategoria.setText(tablaentradas.getValueAt(fila, 3).toString());
         datefecha.setDate(Date.valueOf(tablaentradas.getValueAt(fila, 4).toString()));
@@ -656,7 +763,7 @@ public class Entradas extends javax.swing.JPanel {
         
         ct.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
         if(daoC.buscar(ct)){
-            txtcategoria.setText(ct.getNomCategoria()+"");
+            txtcategoria.setText(ct.getNomCategoria());
                         
         }else{
             txtcategoria.setText("ERROR");
@@ -664,10 +771,17 @@ public class Entradas extends javax.swing.JPanel {
         
         pr.setIdProveedor(Integer.parseInt(txtidproveedor.getText()));
         if(daoP.buscar(pr)){
-            txtproveedor.setText(pr.getNombres()+"");
+            txtproveedor.setText(pr.getRsocial());
                         
         }else{
             txtproveedor.setText("ERROR");
+        }
+        p.setIdProducto(Integer.parseInt(txtidproducto.getText()));
+        if (daoPro.buscar(p)) {
+            txtnombreP.setText(p.getNomProd());
+        }else{
+            txtproveedor.setText("ERROR");
+            
         }
         
     }//GEN-LAST:event_tablaentradasMouseClicked
@@ -688,10 +802,51 @@ public class Entradas extends javax.swing.JPanel {
         
     }//GEN-LAST:event_txtstockKeyReleased
 
+    private void btnreporEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreporEntradaActionPerformed
+        // TODO add your handling code here:
+        GenerarPDF("reporteEntradas");
+        
+    }//GEN-LAST:event_btnreporEntradaActionPerformed
+
+    private void btnbuscarproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarproductoActionPerformed
+        // TODO add your handling code here:
+        BuscaProductos.tipo=false;
+        BuscaProductos m = new BuscaProductos();
+        m.setVisible(true);
+    }//GEN-LAST:event_btnbuscarproductoActionPerformed
+
+    private void btnreporProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreporProductoActionPerformed
+        // TODO add your handling code here:
+        GenerarPDF("reporteProductos");
+        
+        
+    }//GEN-LAST:event_btnreporProductoActionPerformed
+
+    private Connection conection = new conexion().conectar();
+    void GenerarPDF(String reporte){
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+        try {
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/reportes/"+reporte+".jrxml");
+            print = JasperFillManager.fillReport(report,p, conection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Lista de Entradas");
+            view.setVisible(true);
+                        
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    
     //limpiar campos
     void limpiarCampos(){
         txtidentrada.setText("");
-        txtnombre.setText("");
+        txtnombreP.setText("");
         txtstock.setText("");
         txtprecioentrada.setText("");
         txtprecioventa.setText("");
@@ -708,14 +863,63 @@ public class Entradas extends javax.swing.JPanel {
         }
     }
     
+    void agregarEntrada(boolean verifica){
+        //variables para la fecha
+        Calendar cal;
+        int d,me,a;
+        cal = datefecha.getCalendar();
+        d = cal.get(Calendar.DAY_OF_MONTH);
+        me = cal.get(Calendar.MONTH);
+        a = cal.get(Calendar.YEAR)-1900;
+
+        e.setIdproducto(Integer.parseInt(txtidproducto.getText()));
+        e.setStock(Integer.parseInt(txtstock.getText()));
+        e.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
+        e.setFecha(new Date(a,me,d));
+        e.setIdProveedor(Integer.parseInt(txtidproveedor.getText()));
+        e.setPrecioEntrada(Double.parseDouble(txtprecioentrada.getText()));
+        e.setPrecioVenta(Double.parseDouble(txtprecioventa.getText()));
+        e.setTotal(Double.parseDouble(txttotal.getText()));
+        if (verifica==true){
+        if(dao.insertar(e)&&daoPro.sumarStock(Integer.parseInt(txtidproducto.getText()), Integer.parseInt(txtstock.getText()))){                       
+            MenuPrinci m = new MenuPrinci();
+            m.exito("Entrada registrado con éxito"); 
+                
+        }else{
+            MenuPrinci m = new MenuPrinci();
+            m.error("No se pudo registrar la entrada");
+            }
+        }else{
+        p.setIdProducto(Integer.parseInt(txtidproducto.getText()));
+        p.setNomProd(txtnombreP.getText());
+        p.setStock(Integer.parseInt(txtstock.getText()));
+        p.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
+        p.setIdProveedor(Integer.parseInt(txtidproveedor.getText()));
+        p.setPrecioVenta(Double.parseDouble(txtprecioventa.getText()));
+                 
+        if (daoPro.insertar(p)&&dao.insertar(e)) {
+        MenuPrinci m = new MenuPrinci();
+        m.exito("P Entrada registrado con éxito");
+        }else{
+        MenuPrinci m = new MenuPrinci();
+        m.error("No se pudo registrar la entrada");
+        }
+        }
+        
+    }
+    
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btn_guardar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnbuscar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnbuscarcategoria;
+    private RSMaterialComponent.RSButtonMaterialIconDos btnbuscarproducto;
     private RSMaterialComponent.RSButtonMaterialIconDos btnbuscarproveedor;
     private RSMaterialComponent.RSButtonMaterialIconDos btneditar;
     private RSMaterialComponent.RSButtonMaterialIconDos btneliminar;
+    private RSMaterialComponent.RSButtonMaterialIconDos btnreporEntrada;
+    private RSMaterialComponent.RSButtonMaterialIconDos btnreporProducto;
     private com.toedter.calendar.JDateChooser datefecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -724,26 +928,30 @@ public class Entradas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private RSMaterialComponent.RSButtonMaterialIconDos rSButtonMaterialIconDos1;
     private javax.swing.JTable tablaentradas;
     public static javax.swing.JTextField txtcategoria;
     public static javax.swing.JTextField txtidcategoria;
     private javax.swing.JTextField txtidentrada;
+    public static javax.swing.JTextField txtidproducto;
     public static javax.swing.JTextField txtidproveedor;
-    private javax.swing.JTextField txtnombre;
+    public static javax.swing.JTextField txtnombreP;
     private javax.swing.JTextField txtprecioentrada;
-    private javax.swing.JTextField txtprecioventa;
+    public static javax.swing.JTextField txtprecioventa;
     public static javax.swing.JTextField txtproveedor;
     private javax.swing.JTextField txtstock;
     private javax.swing.JTextField txttotal;

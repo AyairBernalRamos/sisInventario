@@ -22,10 +22,11 @@ public class DaoSalida {
     ResultSet rs;
     
     public boolean insertar(salidas c){
-        String SQL="INSERT INTO salidas (numSalida,idCliente,fecha,subtotal,igv,total) VALUES (?,?,?,?,?,?)";
+        String SQL="INSERT INTO salidas (numSalida, idCliente,fecha,subtotal,igv,total) VALUES (?,?,?,?,?,?)";
         try{
             con = cn.conectar();
             ps=con.prepareStatement(SQL);
+            
             ps.setString(1, c.getNumSalida());
             ps.setInt(2, c.getIdCliente());
             ps.setDate(3, c.getFecha());
@@ -47,7 +48,7 @@ public class DaoSalida {
         
     }  
     
-    //buscar
+    //numero de salidas
     public String numSalida(){
         String numero = "";
         String SQL="SELECT MAX(idSalida) FROM salidas";
@@ -64,6 +65,26 @@ public class DaoSalida {
             JOptionPane.showConfirmDialog(null, e);
         }
         return numero;
+    }
+    
+    public boolean restarStock(int idSalida, int cantidad){
+        String SQL="UPDATE entrada SET stock=stock-"+cantidad+" WHERE identrada="+idSalida;
+        try{
+            con = cn.conectar();
+            ps=con.prepareStatement(SQL);
+            
+            int n = ps.executeUpdate();
+            if(n!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showConfirmDialog(null, e);
+            return false;
+        }
+    
     }
     
     

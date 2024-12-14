@@ -5,10 +5,20 @@
 package vista;
 
 import controlador.AuClientes;
+import java.io.File;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.clientes;
+import modelo.conexion;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -84,6 +94,7 @@ public class Clientes extends javax.swing.JPanel {
         btneditar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btneliminar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnbuscar = new RSMaterialComponent.RSButtonMaterialIconDos();
+        btnPDF = new RSMaterialComponent.RSButtonMaterialIconDos();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -94,37 +105,46 @@ public class Clientes extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Registro de Clientes");
 
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+
         jLabel2.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("ID:");
 
         txtidcliente.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Nombres:");
 
         txtnombre.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Apellidos:");
 
         txtapellido.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Documento:");
 
         txtdocumento.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Dirección:");
 
         txtdireccion.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Teléfono:");
 
         txttelefono.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Correo:");
 
         txtcorreo.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
@@ -274,6 +294,15 @@ public class Clientes extends javax.swing.JPanel {
             }
         });
 
+        btnPDF.setBackground(new java.awt.Color(255, 153, 153));
+        btnPDF.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.INSERT_DRIVE_FILE);
+        btnPDF.setRound(25);
+        btnPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPDFActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -297,7 +326,9 @@ public class Clientes extends javax.swing.JPanel {
                                 .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(70, 70, 70)))))
+                                .addGap(32, 32, 32)
+                                .addComponent(btnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)))))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -316,10 +347,12 @@ public class Clientes extends javax.swing.JPanel {
                         .addGap(30, 30, 30)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btneditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btneditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(19, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -440,6 +473,31 @@ public class Clientes extends javax.swing.JPanel {
         
     }//GEN-LAST:event_tbclientesMouseClicked
 
+    private void btnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFActionPerformed
+        // TODO add your handling code here:
+        
+        GenerarPDF();
+        
+    }//GEN-LAST:event_btnPDFActionPerformed
+
+    private Connection conection = new conexion().conectar();
+    void GenerarPDF(){
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+        try {
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/reportes/reporteClientes.jrxml");
+            print = JasperFillManager.fillReport(report,p, conection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Lista de Clientes");
+            view.setVisible(true);
+                        
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
     //limpiar campos
     void limpiarCampos(){
@@ -460,6 +518,7 @@ public class Clientes extends javax.swing.JPanel {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private RSMaterialComponent.RSButtonMaterialIconDos btnPDF;
     private RSMaterialComponent.RSButtonMaterialIconDos btn_guardar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnbuscar;
     private RSMaterialComponent.RSButtonMaterialIconDos btneditar;

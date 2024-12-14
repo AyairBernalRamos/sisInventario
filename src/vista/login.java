@@ -58,6 +58,7 @@ public class login extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(50, 28, 145));
 
         jLabel1.setFont(new java.awt.Font("Raleway SemiBold", 3, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Bienvenid@");
 
         txtusuario.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
@@ -68,8 +69,12 @@ public class login extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Roboto Light", 3, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Usuario:");
 
+        jLabel3.setFont(new java.awt.Font("Roboto Light", 3, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Contraseña:");
 
         txtpassword.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
@@ -145,7 +150,7 @@ public class login extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(216, Short.MAX_VALUE)
+                .addContainerGap(206, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(141, 141, 141))
         );

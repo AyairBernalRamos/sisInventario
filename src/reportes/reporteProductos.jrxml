@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteProductos" language="groovy" pageWidth="650" pageHeight="842" columnWidth="610" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0b0ab3aa-d2f1-4742-8c2e-4142a1e0e9d6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT p.*,pr.Rsocial,c.categoria FROM productos p INNER JOIN proveedor pr ON p.idProveedor=pr.idproveedor
+INNER JOIN categorias c ON p.idCategoria=c.idCategoria;]]>
+	</queryString>
+	<field name="idproducto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="stock" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idCategoria" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idProveedor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precioVenta" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Rsocial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="categoria" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="230" y="0" width="121" height="20" uuid="d3a34aad-cf95-4446-a5f3-23502f70bdb4"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lista Productos]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="29" y="59" width="114" height="20" uuid="fd2422bd-d59b-41de-8a78-feff89a3dad9"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="21" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<rectangle>
+				<reportElement x="21" y="2" width="566" height="20" backcolor="#66FF66" uuid="b3d2d50c-3f60-458c-8404-30fc34ea1233"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="303" y="2" width="100" height="20" uuid="1a9c16b4-8862-44cd-864e-6b608c4acf6c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R. Social]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="419" y="2" width="100" height="20" uuid="4bc5e0a6-a3db-4c87-bccd-c90d2244c769"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Categoria]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="2" width="36" height="20" uuid="c785da60-03b0-4ce4-969a-c4789c8b9856"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="77" y="2" width="100" height="20" uuid="4c93cb7b-45a4-4317-9fdb-d090ee3ea532"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Pro.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="191" y="2" width="100" height="20" uuid="97cc0ee4-d598-4138-b149-723b0dfec9fc"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stock]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="2" width="60" height="20" uuid="09eddf69-7f44-4a01-a3a3-46202690d932"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio V.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="303" y="2" width="100" height="20" uuid="da157869-1e0d-49a1-b90a-38874f9c37ee"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Rsocial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="26" y="2" width="36" height="20" uuid="89af5f68-b45d-4ac5-a0af-b3516db1dead"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idproducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="77" y="2" width="100" height="20" uuid="1a02261f-bb5c-4ffd-9787-cc88eae73a50"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="191" y="2" width="100" height="20" uuid="47f2c92c-675e-417a-a715-fef3e00ddb95"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{stock}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="527" y="2" width="60" height="20" uuid="2201e1b2-d6cd-4721-bc1b-67e497ddaf56"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precioVenta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="2" width="100" height="20" uuid="a68d2e24-2516-4e1f-9035-51456d46d500"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

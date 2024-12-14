@@ -15,9 +15,9 @@ public class conexion {
     
     Connection con;
     String bd = "sis_inventario";
-    String url = "jdbc:mysql://localhost:3307/"+bd;
+    String url = "jdbc:mysql://localhost:3306/"+bd;
     String user = "root";
-    String pass ="BernalMeza23!";
+    String pass ="";
     
     public Connection conectar(){
         try {

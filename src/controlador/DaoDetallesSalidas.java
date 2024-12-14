@@ -21,11 +21,12 @@ public class DaoDetallesSalidas {
     PreparedStatement ps;
     ResultSet rs;
     
-    public boolean insertar(int idSalida,int idEntrada, int cantidad, double importe){
+    public boolean insertar(int idSalida, int idEntrada, int cantidad, double importe){
         String SQL="INSERT INTO detallesalida (idsalida,identrada,cantidad,importe) VALUES ("+idSalida+","+idEntrada+","+cantidad+","+importe+")";
         try{
             con = cn.conectar();
             ps=con.prepareStatement(SQL);
+            
             int n = ps.executeUpdate();
             if(n!=0){
                 return true;

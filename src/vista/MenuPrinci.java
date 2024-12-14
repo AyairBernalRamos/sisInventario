@@ -23,7 +23,7 @@ public class MenuPrinci extends javax.swing.JFrame {
         //this.setBackground(new Color(0,0,0,0));
         
         Home h = new Home();
-        h.setSize(1500,1500);
+        h.setSize(2000,900);
         h.setLocation(0,0);
         
         contenedor.removeAll();
@@ -133,7 +133,7 @@ public class MenuPrinci extends javax.swing.JFrame {
 
         btnusuarios.setBackground(new java.awt.Color(50, 28, 145));
         btnusuarios.setText("USUARIOS");
-        btnusuarios.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.PERSON);
+        btnusuarios.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.GROUP_ADD);
         btnusuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnusuariosActionPerformed(evt);
@@ -343,6 +343,25 @@ public class MenuPrinci extends javax.swing.JFrame {
 
     private void btnusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnusuariosActionPerformed
         // TODO add your handling code here:
+        // boton usuario
+        btncategorias.setSelected(false);
+        btnclientes.setSelected(false);
+        btnhome.setSelected(false);
+        btnentradas.setSelected(false);
+        btnproveedor.setSelected(false);
+        btnsalidas.setSelected(false);
+        btnusuarios.setSelected(true);
+        btnacercade.setSelected(false);
+        
+        Usuarios c = new Usuarios();
+        c.setSize(1120, 600);
+        c.setLocation(0,0);
+        
+        contenedor.removeAll();
+        contenedor.add(c,BorderLayout.CENTER);
+        contenedor.revalidate();
+        contenedor.repaint();
+        
     }//GEN-LAST:event_btnusuariosActionPerformed
 
     private void btnacercadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnacercadeActionPerformed
