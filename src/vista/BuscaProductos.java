@@ -19,9 +19,10 @@ import modelo.productos;
  */
 public class BuscaProductos extends javax.swing.JFrame {
     
+    
+    DefaultTableModel modelo = new DefaultTableModel();
     productos p = new productos();
     DaoProductos dao = new DaoProductos();
-    DefaultTableModel modelo = new DefaultTableModel();
     
     public static boolean tipo;
     //public static boolean tipo;
@@ -71,7 +72,7 @@ public class BuscaProductos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbproductos = new javax.swing.JTable();
         btncerra = new RSMaterialComponent.RSButtonMaterialIconDos();
-        btnbuscar = new RSMaterialComponent.RSButtonMaterialIconDos();
+        btnEnviar = new RSMaterialComponent.RSButtonMaterialIconDos();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -103,12 +104,12 @@ public class BuscaProductos extends javax.swing.JFrame {
             }
         });
 
-        btnbuscar.setText("Enviar");
-        btnbuscar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SEND);
-        btnbuscar.setRound(25);
-        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
+        btnEnviar.setText("Enviar");
+        btnEnviar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SEND);
+        btnEnviar.setRound(25);
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbuscarActionPerformed(evt);
+                btnEnviarActionPerformed(evt);
             }
         });
 
@@ -131,7 +132,7 @@ public class BuscaProductos extends javax.swing.JFrame {
                             .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btncerra, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(102, 102, 102))))
         );
@@ -149,7 +150,7 @@ public class BuscaProductos extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btncerra, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -177,7 +178,7 @@ public class BuscaProductos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btncerraActionPerformed
 
-    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         // ENVIAR
         // ENVIAR
         if (tipo==true) {
@@ -189,14 +190,13 @@ public class BuscaProductos extends javax.swing.JFrame {
         else{
             Entradas.txtnombreP.setText(txtnombre.getText());
             Entradas.txtprecioventa.setText(txtprecio.getText());
-            Entradas.txtidproducto.setText(txtid.getText());
+            Entradas.txtidProducto.setText(txtid.getText());
+            Entradas.idpNuevo=Integer.parseInt(txtid.getText());
             
         }
-             
-       
         dispose();
         
-    }//GEN-LAST:event_btnbuscarActionPerformed
+    }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void tbproductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbproductosMouseClicked
         // TODO add your handling code here:
@@ -251,7 +251,7 @@ public class BuscaProductos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private RSMaterialComponent.RSButtonMaterialIconDos btnbuscar;
+    private RSMaterialComponent.RSButtonMaterialIconDos btnEnviar;
     private RSMaterialComponent.RSButtonMaterialIconDos btncerra;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

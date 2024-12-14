@@ -471,14 +471,14 @@ public class MenuPrinci extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btnacercade;
-    private RSMaterialComponent.RSButtonMaterialIconDos btncategorias;
-    private RSMaterialComponent.RSButtonMaterialIconDos btnclientes;
-    private RSMaterialComponent.RSButtonMaterialIconDos btnentradas;
+    public static RSMaterialComponent.RSButtonMaterialIconDos btncategorias;
+    public static RSMaterialComponent.RSButtonMaterialIconDos btnclientes;
+    public static RSMaterialComponent.RSButtonMaterialIconDos btnentradas;
     private RSMaterialComponent.RSButtonMaterialIconDos btnhome;
-    private RSMaterialComponent.RSButtonMaterialIconDos btnproveedor;
-    private RSMaterialComponent.RSButtonMaterialIconDos btnsalidas;
+    public static RSMaterialComponent.RSButtonMaterialIconDos btnproveedor;
+    public static RSMaterialComponent.RSButtonMaterialIconDos btnsalidas;
     private RSMaterialComponent.RSButtonMaterialIconDos btnsalir;
-    private RSMaterialComponent.RSButtonMaterialIconDos btnusuarios;
+    public static RSMaterialComponent.RSButtonMaterialIconDos btnusuarios;
     private javax.swing.JPanel contenedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

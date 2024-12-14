@@ -67,7 +67,7 @@ public class DaoSalida {
         return numero;
     }
     
-    public boolean restarStock(int idSalida, int cantidad){
+    /*public boolean restarStock(int idSalida, int cantidad){
         String SQL="UPDATE entrada SET stock=stock-"+cantidad+" WHERE identrada="+idSalida;
         try{
             con = cn.conectar();
@@ -85,7 +85,7 @@ public class DaoSalida {
             return false;
         }
     
-    }
+    }*/
     
     
     

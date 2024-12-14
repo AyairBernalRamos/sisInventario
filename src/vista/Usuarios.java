@@ -4,17 +4,50 @@
  */
 package vista;
 
+import controlador.DaoUsuario;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.usuarios;
+
 /**
  *
  * @author Ayair Martin
  */
 public class Usuarios extends javax.swing.JPanel {
 
+    usuarios u = new usuarios();
+    DaoUsuario dao = new DaoUsuario();
+    DefaultTableModel modelo = new DefaultTableModel();
     /**
      * Creates new form Usuarios
      */
     public Usuarios() {
         initComponents();
+        listarUsuario();
+    }
+    
+    //metodo para listar
+    private void listarUsuario(){
+        List<usuarios> lista = dao.Listar();
+        modelo = (DefaultTableModel) tbusuarios.getModel();
+        Object[] ob = new Object[10];
+        for(int i=0;i<lista.size();i++){
+            ob[0]=lista.get(i).getIdusuario();
+            ob[1]=lista.get(i).getNombres();
+            ob[2]=lista.get(i).getApellidos();
+            ob[3]=lista.get(i).getDocumento();
+            ob[4]=lista.get(i).getDireccion();
+            ob[5]=lista.get(i).getTelefono();
+            ob[6]=lista.get(i).getCorreo();
+            ob[7]=lista.get(i).getTipoUsuario();
+            ob[8]=lista.get(i).getUsuario();
+            ob[9]=lista.get(i).getPassword();
+            modelo.addRow(ob);
+            
+            
+        }
+        tbusuarios.setModel(modelo);
     }
 
     /**
@@ -48,13 +81,13 @@ public class Usuarios extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         txtusuario = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txtacceso = new javax.swing.JTextField();
+        txtpass = new javax.swing.JTextField();
         comboTipoUsuario = new javax.swing.JComboBox<>();
         btneditar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btneliminar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btnbuscar = new RSMaterialComponent.RSButtonMaterialIconDos();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbclientes = new javax.swing.JTable();
+        tbusuarios = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1120, 600));
@@ -144,10 +177,10 @@ public class Usuarios extends javax.swing.JPanel {
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Password:");
 
-        txtacceso.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
-        txtacceso.addActionListener(new java.awt.event.ActionListener() {
+        txtpass.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
+        txtpass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtaccesoActionPerformed(evt);
+                txtpassActionPerformed(evt);
             }
         });
 
@@ -189,7 +222,7 @@ public class Usuarios extends javax.swing.JPanel {
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtacceso)
+                            .addComponent(txtpass)
                             .addComponent(txtusuario)
                             .addComponent(comboTipoUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
@@ -239,7 +272,7 @@ public class Usuarios extends javax.swing.JPanel {
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtacceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -274,7 +307,7 @@ public class Usuarios extends javax.swing.JPanel {
             }
         });
 
-        tbclientes.setModel(new javax.swing.table.DefaultTableModel(
+        tbusuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -282,13 +315,13 @@ public class Usuarios extends javax.swing.JPanel {
                 "ID", "Nombres", "Apellidos", "Documento", "Dirección", "Teléfono", "Correo", "Tipo Usuario", "Usuario", "Password"
             }
         ));
-        tbclientes.setMinimumSize(new java.awt.Dimension(300, 0));
-        tbclientes.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbusuarios.setMinimumSize(new java.awt.Dimension(300, 0));
+        tbusuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbclientesMouseClicked(evt);
+                tbusuariosMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbclientes);
+        jScrollPane1.setViewportView(tbusuarios);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -344,24 +377,27 @@ public class Usuarios extends javax.swing.JPanel {
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
         // TODO add your handling code here:
-        /*c.setNombres(txtnombre.getText());
-        c.setApellidos(txtapellido.getText());
-        c.setDocumento(txtdocumento.getText());
-        c.setDireccion(txtdireccion.getText());
-        c.setTelefono(txttelefono.getText());
-        c.setCorreo(txtcorreo.getText());
-        if(auClientes.insertar(c)){
+        u.setNombres(txtnombre.getText());
+        u.setApellidos(txtapellido.getText());
+        u.setDocumento(txtdocumento.getText());
+        u.setDireccion(txtdireccion.getText());
+        u.setTelefono(txttelefono.getText());
+        u.setCorreo(txtcorreo.getText());
+        u.setTipoUsuario(comboTipoUsuario.getSelectedItem().toString());
+        u.setUsuario(txtusuario.getText());
+        u.setPassword(txtpass.getText());
+        if(dao.insertar(u.getNombres(),u.getApellidos(),u.getDocumento(),u.getDireccion(),u.getTelefono(),u.getCorreo(),u.getTipoUsuario(),u.getUsuario(),u.getPassword())){
             //JOptionPane.showMessageDialog(null, "Cliente registrado con éxito");
             MenuPrinci m = new MenuPrinci();
-            m.exito("Cliente registrado con éxito");
+            m.exito("Usuario registrado con éxito");
             limpiarCampos();//llamamos al metodo limpiar
-            limpiarTablaClientes();
-            listarClientes();
+            limpiarTabla();
+            listarUsuario();
         }else{
             MenuPrinci m = new MenuPrinci();
-            m.error("No se registró el cliente");
+            m.error("No se registró el usuario");
             //JOptionPane.showMessageDialog(null, "No se registró el cliente");
-        }*/
+        }
 
     }//GEN-LAST:event_btn_guardarActionPerformed
 
@@ -369,48 +405,53 @@ public class Usuarios extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtusuarioActionPerformed
 
-    private void txtaccesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtaccesoActionPerformed
+    private void txtpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpassActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtaccesoActionPerformed
+    }//GEN-LAST:event_txtpassActionPerformed
 
     private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
         // TODO add your handling code here:
-        /*int fila = tbclientes.getSelectedRow();
-        if(fila==-1 && txtidcliente.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Seleccione un cliente");
+        int fila = tbusuarios.getSelectedRow();
+        if(fila==-1 && txtidusuario.getText().isEmpty()){
+            //JOptionPane.showMessageDialog(null, "Seleccione un Usuario");
+            MenuPrinci m = new MenuPrinci();
+                m.exito("Seleccione un Usuario");
         }
         else{
-            c.setIdCliente(Integer.parseInt(txtidcliente.getText()));
-            c.setNombres(txtnombre.getText());
-            c.setApellidos(txtapellido.getText());
-            c.setDocumento(txtdocumento.getText());
-            c.setDireccion(txtdireccion.getText());
-            c.setTelefono(txttelefono.getText());
-            c.setCorreo(txtcorreo.getText());
-            if (auClientes.editar(c)) {
+            u.setIdusuario(Integer.parseInt(txtidusuario.getText()));
+            u.setNombres(txtnombre.getText());
+            u.setApellidos(txtapellido.getText());
+            u.setDocumento(txtdocumento.getText());
+            u.setDireccion(txtdireccion.getText());
+            u.setTelefono(txttelefono.getText());
+            u.setCorreo(txtcorreo.getText());
+            u.setTipoUsuario(comboTipoUsuario.getSelectedItem().toString());
+            u.setUsuario(txtusuario.getText());
+            u.setPassword(txtpass.getText());
+            if (dao.editar(u.getNombres(),u.getApellidos(),u.getDocumento(),u.getDireccion(),u.getTelefono(),u.getCorreo(),u.getTipoUsuario(),u.getUsuario(),u.getPassword(),u.getIdusuario())) {
                 //JOptionPane.showMessageDialog(null, "Se modificó con éxito el cliente");
                 MenuPrinci m = new MenuPrinci();
-                m.exito("Se modificó con éxito el cliente");
-                limpiarTablaClientes();
-                listarClientes();
+                m.exito("Se modificó con éxito el usuario");
+                limpiarTabla();
+                listarUsuario();
                 limpiarCampos();
             }
             else{
                 MenuPrinci m = new MenuPrinci();
-                m.error("No se pudo modificar el cliente");
+                m.error("No se pudo modificar el usuario");
             }
-        }*/
+        }
     }//GEN-LAST:event_btneditarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         // TODO add your handling code here:
-        /*if (!txtidcliente.getText().isEmpty()) {
-            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar el cliente?","Confirmar",2);
+        if (!txtidusuario.getText().isEmpty()) {
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar el usuario?","Confirmar",2);
             if(confirmacion == 0){
-                c.setIdCliente(Integer.parseInt(txtidcliente.getText()));
-                auClientes.eliminar(c);
-                limpiarTablaClientes();
-                listarClientes();
+                u.setIdusuario(Integer.parseInt(txtidusuario.getText()));
+                dao.eliminar(u);
+                limpiarTabla();
+                listarUsuario();
                 limpiarCampos();
                 //JOptionPane.showMessageDialog(null, "Se eliminó con éxito");
                 MenuPrinci m = new MenuPrinci();
@@ -419,45 +460,76 @@ public class Usuarios extends javax.swing.JPanel {
             }
         }else{
             MenuPrinci m = new MenuPrinci();
-            m.warning("Seleccione un cliente");
+            m.warning("Seleccione un Usuario");
             //JOptionPane.showMessageDialog(null, "Seleccione un cliente");
-        }*/
+        }
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
         // BUSCAR
-        /*c.setDocumento(txtdocumento.getText());
-        if(auClientes.buscar(c)){
-            txtidcliente.setText(c.getIdCliente()+"");
-            txtnombre.setText(c.getNombres()+"");
-            txtapellido.setText(c.getApellidos()+"");
-            txtdocumento.setText(c.getDocumento()+"");
-            txtdireccion.setText(c.getDireccion()+"");
-            txttelefono.setText(c.getTelefono()+"");
-            txtcorreo.setText(c.getCorreo()+"");
+        u.setDocumento(txtdocumento.getText());
+        if(dao.buscar(u)){
+            txtidusuario.setText(u.getIdusuario()+"");
+            txtnombre.setText(u.getNombres()+"");
+            txtapellido.setText(u.getApellidos()+"");
+            txtdocumento.setText(u.getDocumento()+"");
+            txtdireccion.setText(u.getDireccion()+"");
+            txttelefono.setText(u.getTelefono()+"");
+            txtcorreo.setText(u.getCorreo()+"");
+            comboTipoUsuario.setSelectedItem(u.getTipoUsuario()+"");
+            txtusuario.setText(u.getUsuario()+"");
+            txtpass.setText(u.getPassword()+"");
 
         }else{
             MenuPrinci m = new MenuPrinci();
-            m.warning("El cliente no existe");
+            m.warning("El usuario no existe");
             //JOptionPane.showMessageDialog(null, "El cliente no existe");
             limpiarCampos();
-        }*/
+        }
     }//GEN-LAST:event_btnbuscarActionPerformed
 
-    private void tbclientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbclientesMouseClicked
+    private void tbusuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbusuariosMouseClicked
         // TODO add your handling code here:
-        /*int fila=tbclientes.getSelectedRow();
-        txtidcliente.setText(tbclientes.getValueAt(fila, 0).toString());
-        txtnombre.setText(tbclientes.getValueAt(fila, 1).toString());
-        txtapellido.setText(tbclientes.getValueAt(fila, 2).toString());
-        txtdocumento.setText(tbclientes.getValueAt(fila, 3).toString());
-        txtdireccion.setText(tbclientes.getValueAt(fila, 4).toString());
-        txttelefono.setText(tbclientes.getValueAt(fila, 5).toString());
-        txtcorreo.setText(tbclientes.getValueAt(fila, 6).toString());
-        */
-    }//GEN-LAST:event_tbclientesMouseClicked
+        int fila=tbusuarios.getSelectedRow();
+        txtidusuario.setText(tbusuarios.getValueAt(fila, 0).toString());
+        txtnombre.setText(tbusuarios.getValueAt(fila, 1).toString());
+        txtapellido.setText(tbusuarios.getValueAt(fila, 2).toString());
+        txtdocumento.setText(tbusuarios.getValueAt(fila, 3).toString());
+        txtdireccion.setText(tbusuarios.getValueAt(fila, 4).toString());
+        txttelefono.setText(tbusuarios.getValueAt(fila, 5).toString());
+        txtcorreo.setText(tbusuarios.getValueAt(fila, 6).toString());
+        comboTipoUsuario.setSelectedItem(tbusuarios.getValueAt(fila, 7).toString());
+        txtusuario.setText(tbusuarios.getValueAt(fila, 8).toString());
+        u.setDocumento(txtdocumento.getText());
+        
+        if(dao.buscar(u)){
+            txtpass.setText(u.getPassword());
+        }
+        
+    }//GEN-LAST:event_tbusuariosMouseClicked
 
 
+    //limpiar campos
+    void limpiarCampos(){
+        txtidusuario.setText("");
+        txtnombre.setText("");
+        txtapellido.setText("");
+        txtdocumento.setText("");
+        txtdireccion.setText("");
+        txttelefono.setText("");
+        txtcorreo.setText("");
+        //comboTipoUsuario.setText("");
+        txtusuario.setText("");
+        txtpass.setText("");
+    }
+    void limpiarTabla(){
+        for(int i=0;i<modelo.getRowCount();i++){
+            modelo.removeRow(i);
+            i=0-1;
+        }
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonMaterialIconDos btn_guardar;
     private RSMaterialComponent.RSButtonMaterialIconDos btnbuscar;
@@ -478,14 +550,14 @@ public class Usuarios extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private RSMaterialComponent.RSButtonMaterialIconDos rSButtonMaterialIconDos1;
-    private javax.swing.JTable tbclientes;
-    private javax.swing.JTextField txtacceso;
+    private javax.swing.JTable tbusuarios;
     private javax.swing.JTextField txtapellido;
     private javax.swing.JTextField txtcorreo;
     private javax.swing.JTextField txtdireccion;
     private javax.swing.JTextField txtdocumento;
     private javax.swing.JTextField txtidusuario;
     private javax.swing.JTextField txtnombre;
+    private javax.swing.JTextField txtpass;
     private javax.swing.JTextField txttelefono;
     private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables

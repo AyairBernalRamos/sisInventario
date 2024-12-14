@@ -46,6 +46,8 @@ public class Entradas extends javax.swing.JPanel {
     DaoProveedor daoP = new DaoProveedor();
     DefaultTableModel modelo = new DefaultTableModel();
 
+    public static int idpNuevo;
+    
     /**
      * Creates new form Entradas
      */
@@ -80,11 +82,11 @@ public class Entradas extends javax.swing.JPanel {
     void numProducto(){
         int numero = daoPro.numProducto();
         if (numero == 0) {
-            txtidproducto.setText("1");
+            txtidProducto.setText("1");
         }else{
             int i = numero;
             i=i+1;
-            txtidproducto.setText(i+"");
+            txtidProducto.setText(i+"");
         }
     }
     
@@ -140,7 +142,7 @@ public class Entradas extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         btnbuscarproducto = new RSMaterialComponent.RSButtonMaterialIconDos();
         jLabel8 = new javax.swing.JLabel();
-        txtidproducto = new javax.swing.JTextField();
+        txtidProducto = new javax.swing.JTextField();
         btnreporProducto = new RSMaterialComponent.RSButtonMaterialIconDos();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -483,7 +485,7 @@ public class Entradas extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("ID Producto:");
 
-        txtidproducto.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
+        txtidProducto.setFont(new java.awt.Font("Roboto", 2, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -495,7 +497,7 @@ public class Entradas extends javax.swing.JPanel {
                         .addGap(14, 14, 14)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(txtidproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtidProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
@@ -510,7 +512,7 @@ public class Entradas extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtidproducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtidProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnbuscarproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -598,7 +600,7 @@ public class Entradas extends javax.swing.JPanel {
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
         // TODO add your handling code here:
-        p.setIdProducto(Integer.parseInt(txtidproducto.getText()));
+        p.setIdProducto(Integer.parseInt(txtidProducto.getText()));
         if(daoPro.buscar(p)){
             agregarEntrada(true);
             
@@ -627,7 +629,7 @@ public class Entradas extends javax.swing.JPanel {
             me = cal.get(Calendar.MONTH);
             a = cal.get(Calendar.YEAR)-1900;
 
-            e.setIdproducto(Integer.parseInt(txtidproducto.getText()));
+            e.setIdproducto(Integer.parseInt(txtidProducto.getText()));
             e.setStock(Integer.parseInt(txtstock.getText()));
             e.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
             e.setFecha(new Date(a,me,d));
@@ -657,6 +659,11 @@ public class Entradas extends javax.swing.JPanel {
             int confirmacion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar la entrada?","Confirmar",2);
             if(confirmacion == 0){
                 e.setIdentrada(Integer.parseInt(txtidentrada.getText()));
+                dao.buscar(e);
+                int idP=e.getIdproducto();
+                int cant=e.getStock();
+                daoPro.restarStock(idP, cant);
+                
                 dao.eliminar(e);
                 limpiarTabla();
                 listarEntradas();
@@ -684,7 +691,7 @@ public class Entradas extends javax.swing.JPanel {
             txtprecioventa.setText(e.getPrecioVenta()+"");
             txttotal.setText(e.getTotal()+"");
             txtidcategoria.setText(e.getIdCategoria()+"");
-            txtidproducto.setText(e.getIdproducto()+"");
+            txtidProducto.setText(e.getIdproducto()+"");
             txtidproveedor.setText(e.getIdProveedor()+"");
             datefecha.setDate(e.getFecha());
             ct.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
@@ -702,7 +709,7 @@ public class Entradas extends javax.swing.JPanel {
             }else{
                 txtproveedor.setText("ERROR");
             }
-            p.setIdProducto(Integer.parseInt(txtidproducto.getText()));
+            p.setIdProducto(Integer.parseInt(txtidProducto.getText()));
             if (daoPro.buscar(p)) {
                 txtnombreP.setText(p.getNomProd());
             }else{
@@ -752,7 +759,7 @@ public class Entradas extends javax.swing.JPanel {
         // TODO add your handling code here:
         int fila=tablaentradas.getSelectedRow();
         txtidentrada.setText(tablaentradas.getValueAt(fila, 0).toString());
-        txtidproducto.setText(tablaentradas.getValueAt(fila, 1).toString());
+        txtidProducto.setText(tablaentradas.getValueAt(fila, 1).toString());
         txtstock.setText(tablaentradas.getValueAt(fila, 2).toString());
         txtidcategoria.setText(tablaentradas.getValueAt(fila, 3).toString());
         datefecha.setDate(Date.valueOf(tablaentradas.getValueAt(fila, 4).toString()));
@@ -776,7 +783,7 @@ public class Entradas extends javax.swing.JPanel {
         }else{
             txtproveedor.setText("ERROR");
         }
-        p.setIdProducto(Integer.parseInt(txtidproducto.getText()));
+        p.setIdProducto(Integer.parseInt(txtidProducto.getText()));
         if (daoPro.buscar(p)) {
             txtnombreP.setText(p.getNomProd());
         }else{
@@ -872,7 +879,7 @@ public class Entradas extends javax.swing.JPanel {
         me = cal.get(Calendar.MONTH);
         a = cal.get(Calendar.YEAR)-1900;
 
-        e.setIdproducto(Integer.parseInt(txtidproducto.getText()));
+        e.setIdproducto(Integer.parseInt(txtidProducto.getText()));
         e.setStock(Integer.parseInt(txtstock.getText()));
         e.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
         e.setFecha(new Date(a,me,d));
@@ -881,7 +888,7 @@ public class Entradas extends javax.swing.JPanel {
         e.setPrecioVenta(Double.parseDouble(txtprecioventa.getText()));
         e.setTotal(Double.parseDouble(txttotal.getText()));
         if (verifica==true){
-        if(dao.insertar(e)&&daoPro.sumarStock(Integer.parseInt(txtidproducto.getText()), Integer.parseInt(txtstock.getText()))){                       
+        if(dao.insertar(e)&&daoPro.sumarStock(Integer.parseInt(txtidProducto.getText()), Integer.parseInt(txtstock.getText()))){                       
             MenuPrinci m = new MenuPrinci();
             m.exito("Entrada registrado con éxito"); 
                 
@@ -890,11 +897,10 @@ public class Entradas extends javax.swing.JPanel {
             m.error("No se pudo registrar la entrada");
             }
         }else{
-        p.setIdProducto(Integer.parseInt(txtidproducto.getText()));
+        p.setIdProducto(Integer.parseInt(txtidProducto.getText()));
         p.setNomProd(txtnombreP.getText());
         p.setStock(Integer.parseInt(txtstock.getText()));
         p.setIdCategoria(Integer.parseInt(txtidcategoria.getText()));
-        p.setIdProveedor(Integer.parseInt(txtidproveedor.getText()));
         p.setPrecioVenta(Double.parseDouble(txtprecioventa.getText()));
                  
         if (daoPro.insertar(p)&&dao.insertar(e)) {
@@ -945,9 +951,9 @@ public class Entradas extends javax.swing.JPanel {
     private RSMaterialComponent.RSButtonMaterialIconDos rSButtonMaterialIconDos1;
     private javax.swing.JTable tablaentradas;
     public static javax.swing.JTextField txtcategoria;
+    public static javax.swing.JTextField txtidProducto;
     public static javax.swing.JTextField txtidcategoria;
     private javax.swing.JTextField txtidentrada;
-    public static javax.swing.JTextField txtidproducto;
     public static javax.swing.JTextField txtidproveedor;
     public static javax.swing.JTextField txtnombreP;
     private javax.swing.JTextField txtprecioentrada;

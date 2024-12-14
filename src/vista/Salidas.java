@@ -8,6 +8,7 @@ import controlador.AuClientes;
 import controlador.DaoDetallesSalidas;
 import controlador.DaoSalida;
 import controlador.DaoEntradas;
+import controlador.DaoProductos;
 import java.io.File;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class Salidas extends javax.swing.JPanel {
     clientes c = new clientes();
     AuClientes daoC = new AuClientes();    
     DefaultTableModel modelo = new DefaultTableModel();
+    DaoProductos daoPro = new DaoProductos();
     
     
     entradas e = new entradas();
@@ -718,7 +720,7 @@ public class Salidas extends javax.swing.JPanel {
             
             int idEntrada= Integer.parseInt(tbsalidas.getValueAt(i, 1).toString());
             int cantidad= Integer.parseInt(tbsalidas.getValueAt(i, 4).toString());
-            daoS.restarStock(idEntrada, cantidad);
+            daoPro.restarStock(idEntrada, cantidad);
             
         }
     }

@@ -94,7 +94,7 @@ public class BuscaDato extends javax.swing.JFrame {
         tabla = new javax.swing.JTable();
         txtid = new javax.swing.JTextField();
         txtnombre = new javax.swing.JTextField();
-        btnbuscar = new RSMaterialComponent.RSButtonMaterialIconDos();
+        btnEnviar = new RSMaterialComponent.RSButtonMaterialIconDos();
         btncerra = new RSMaterialComponent.RSButtonMaterialIconDos();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -124,12 +124,12 @@ public class BuscaDato extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla);
 
-        btnbuscar.setText("Enviar");
-        btnbuscar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SEND);
-        btnbuscar.setRound(25);
-        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
+        btnEnviar.setText("Enviar");
+        btnEnviar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SEND);
+        btnEnviar.setRound(25);
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbuscarActionPerformed(evt);
+                btnEnviarActionPerformed(evt);
             }
         });
 
@@ -161,7 +161,7 @@ public class BuscaDato extends javax.swing.JFrame {
                         .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btncerra, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
@@ -176,7 +176,7 @@ public class BuscaDato extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
@@ -198,7 +198,7 @@ public class BuscaDato extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         // ENVIAR
         if (tipo==true) {
             Entradas.txtidcategoria.setText(txtid.getText());
@@ -210,7 +210,7 @@ public class BuscaDato extends javax.swing.JFrame {
         }
         dispose();
         
-    }//GEN-LAST:event_btnbuscarActionPerformed
+    }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void btncerraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncerraActionPerformed
         // TODO add your handling code here:
@@ -263,7 +263,7 @@ public class BuscaDato extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private RSMaterialComponent.RSButtonMaterialIconDos btnbuscar;
+    private RSMaterialComponent.RSButtonMaterialIconDos btnEnviar;
     private RSMaterialComponent.RSButtonMaterialIconDos btncerra;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JPanel jPanel1;

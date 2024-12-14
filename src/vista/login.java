@@ -185,9 +185,29 @@ public class login extends javax.swing.JFrame {
         us = au.login(txtusuario.getText(), txtpassword.getText());
         if (us.getUsuario()!=null && us.getPassword()!=null) {
             //JOptionPane.showMessageDialog(null, "Bienvenid@");
+            MenuPrinci m = new MenuPrinci();
+            /*Administrador
+            Vendedor
+            Almacenero*/
+            if (us.getTipoUsuario().equals("Vendedor")) {
+                m.btnsalidas.setEnabled(true);
+                m.btncategorias.setVisible(false);
+                m.btnclientes.setVisible(false);
+                m.btnentradas.setVisible(false);
+                m.btnproveedor.setVisible(false);
+                m.btnusuarios.setVisible(false);
+                
+            }else if(us.getTipoUsuario().equals("Almacenero")){
+                m.btnsalidas.setVisible(false);
+                m.btncategorias.setEnabled(true);
+                m.btnclientes.setVisible(false);
+                m.btnentradas.setEnabled(true);
+                m.btnproveedor.setEnabled(true);
+                m.btnusuarios.setVisible(false);
+            }
             Notification panel = new Notification(this, Notification.Type.SUCCESS, Notification.Location.TOP_RIGHT, "Bienvenid@");
             panel.showNotification();
-            MenuPrinci m = new MenuPrinci();
+            
             m.setVisible(true);
             dispose();
             

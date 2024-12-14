@@ -67,7 +67,7 @@
                           <Component id="txtnombre" min="-2" pref="173" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnbuscar" min="-2" pref="117" max="-2" attributes="0"/>
+                              <Component id="btnEnviar" min="-2" pref="117" max="-2" attributes="0"/>
                               <Component id="btncerra" min="-2" pref="117" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -88,7 +88,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtid" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtnombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnbuscar" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="btnEnviar" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="186" max="-2" attributes="0"/>
@@ -137,7 +137,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtnombre">
         </Component>
-        <Component class="RSMaterialComponent.RSButtonMaterialIconDos" name="btnbuscar">
+        <Component class="RSMaterialComponent.RSButtonMaterialIconDos" name="btnEnviar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Enviar"/>
             <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
@@ -146,7 +146,7 @@
             <Property name="round" type="int" value="25"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnbuscarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEnviarActionPerformed"/>
           </Events>
         </Component>
         <Component class="RSMaterialComponent.RSButtonMaterialIconDos" name="btncerra">
